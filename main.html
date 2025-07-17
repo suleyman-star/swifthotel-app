@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <title>ewing & SwiftHotel</title>
+  <style>
+    html, body {
+      margin: 0; padding: 0; height: 100%;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      overflow: hidden;
+      background: #121212;
+      color: white;
+    }
+    iframe {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      border: none;
+      z-index: 0;
+      transition: transform 0.3s ease;
+      transform-origin: top left;
+    }
+    
+    .window-controls {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 8px;
+      z-index: 9999;
+    }
+
+    .window-controls div {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .window-controls button {
+      background: rgba(255,255,255,0.1);
+      color: white;
+      border: none;
+      padding: 6px 9px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 15px;
+      transition: background-color 0.3s ease;
+    }
+
+    .window-controls button:hover {
+      background-color: #000; /* siyah */
+    }
+
+   .window-controls span {
+  margin-top: 4px;
+  font-size: 11px;
+  color: #f0f0f0;
+  text-align: center;
+  text-shadow: none;
+  user-select: none;
+  background: rgba(0, 0, 0, 0.6); /* Arka plan eklendi */
+  padding: 2px 6px;
+  border-radius: 3px;
+}
+  </style>
+</head>
+<body>
+  <div class="window-controls">
+    <div>
+      <button title="Küçült" onclick="window.electronAPI.minimize()">🗕</button>
+      <span>Küçült</span>
+    </div>
+    <div>
+      <button title="Büyüt / Geri Al" onclick="window.electronAPI.toggleMaximize()">🗖</button>
+      <span>Büyüt</span>
+    </div>
+    <div>
+      <button title="Tam Ekran" onclick="window.electronAPI.toggleFullscreen()">⛶</button>
+      <span>Tam Ekran</span>
+    </div>
+    <div>
+      <button title="Kapat" onclick="window.electronAPI.close()">✖</button>
+      <span>Kapat</span>
+    </div>
+    <div>
+      <button title="Yakınlaştır" onclick="zoomIn()">🔍</button>
+      <span>Yakınlaştır</span>
+    </div>
+    <div>
+      <button title="Uzaklaştır" onclick="zoomOut()">🔎</button>
+      <span>Uzaklaştır</span>
+    </div>
+  </div>
+
+  <iframe src="https://swifthotel.pw" id="siteFrame"></iframe>
+
+  <script>
+    let currentScale = 1;
+    const scaleStep = 0.1;
+    const minScale = 0.5;
+    const maxScale = 3;
+
+    function applyZoom() {
+      const iframe = document.getElementById('siteFrame');
+      iframe.style.transform = `scale(${currentScale})`;
+      iframe.style.width = `${100 / currentScale}%`;
+      iframe.style.height = `${100 / currentScale}%`;
+    }
+
+    function zoomIn() {
+      if (currentScale < maxScale) {
+        currentScale += scaleStep;
+        applyZoom();
+      }
+    }
+
+    function zoomOut() {
+      if (currentScale > minScale) {
+        currentScale -= scaleStep;
+        applyZoom();
+      }
+    }
+
+    applyZoom();
+
+    console.log("Başlangıç currentScale:", currentScale);
+  </script>
+</body>
+</html>

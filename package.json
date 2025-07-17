@@ -1,0 +1,35 @@
+{
+  "name": "swifthotel-app",
+  "version": "1.0.0",
+  "description": "SwiftHotel Electron Uygulaması",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "dist": "electron-builder --win portable"
+  },
+  "author": "Ewing (Süleyman ÇOBAN)",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^25.9.8",
+    "electron-builder": "^24.13.3"
+  },
+  "build": {
+    "appId": "com.swifthotel.app",
+    "productName": "SwiftHotel",
+    "copyright": "© 2025 ewing & SwiftHotel",
+    "win": {
+      "icon": "build/icon.ico",
+      "target": [
+        "portable"
+      ],
+      "publisherName": "ewing (Süleyman ÇOBAN)",
+      "requestedExecutionLevel": "asInvoker"
+    },
+    "files": [
+      "**/*"
+    ]
+  },
+  "dependencies": {
+    "node-fetch": "^3.3.2"
+  }
+}
