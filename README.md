@@ -35,3 +35,6 @@ npm install
 # 4. Uygulamayı başlat
 npm start
 ```
+## 📄 Lisans
+
+Bu proje [MIT Lisansı](LICENSE) ile lisanslanmıştır.
